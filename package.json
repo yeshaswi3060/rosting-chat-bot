@@ -2,6 +2,7 @@
   "name": "street-roast-bot",
   "version": "1.0.0",
   "description": "A Hinglish comedy roast bot with Hindi TTS",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "vite",

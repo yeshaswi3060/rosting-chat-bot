@@ -215,58 +215,105 @@ export default function StreetRoastBot() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white flex items-center justify-center p-2 sm:p-4">
-      <div className="w-full max-w-4xl grid grid-rows-[auto,1fr,auto] rounded-2xl shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden min-h-[82vh]">
-        <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 bg-white/5 border-b border-white/10">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="p-2 rounded-xl bg-white/10 shrink-0"><Flame className="w-5 h-5"/></div>
-            <div className="truncate">
-              <div className="text-base sm:text-xl font-semibold tracking-tight truncate">Yeshaswi Roast Bot • Street Roast (Anti‑Loop)</div>
-              <div className="text-[11px] sm:text-sm text-white/60 truncate">Normal life roasts • Hinglish text • Hindi voice</div>
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white flex items-center justify-center p-1 sm:p-2 md:p-4">
+      <div className="w-full max-w-4xl grid grid-rows-[auto,1fr,auto] rounded-xl sm:rounded-2xl shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden min-h-[85vh] sm:min-h-[82vh]">
+        {/* Header */}
+        <div className="flex items-center justify-between px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 bg-white/5 border-b border-white/10">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white/10 shrink-0">
+              <Flame className="w-4 h-4 sm:w-5 sm:h-5"/>
+            </div>
+            <div className="truncate min-w-0">
+              <div className="text-sm sm:text-base md:text-xl font-semibold tracking-tight truncate">
+                Yeshaswi Roast Bot • Street Roast
+              </div>
+              <div className="text-[10px] sm:text-[11px] md:text-sm text-white/60 truncate">
+                Normal life roasts • Hinglish text • Hindi voice
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs sm:text-sm">
-            <button onClick={()=>setSpeechOn(v=>!v)} className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-black/40 hover:bg-black/50 border border-white/10">
-              {speechOn? <Volume2 className="w-4 h-4"/>:<VolumeX className="w-4 h-4"/>}
-              <span className="hidden sm:inline">{speechOn?"Bolna ON":"Bolna OFF"}</span>
+          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm shrink-0">
+            <button 
+              onClick={()=>setSpeechOn(v=>!v)} 
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-2.5 py-1.5 rounded-lg bg-black/40 hover:bg-black/50 border border-white/10 transition-colors"
+            >
+              {speechOn? <Volume2 className="w-3 h-3 sm:w-4 sm:h-4"/>:<VolumeX className="w-3 h-3 sm:w-4 sm:h-4"/>}
+              <span className="hidden md:inline">{speechOn?"Bolna ON":"Bolna OFF"}</span>
             </button>
-            <button onClick={resetChat} className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/10"><RefreshCw className="w-4 h-4"/> Reset</button>
+            <button 
+              onClick={resetChat} 
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/10 transition-colors"
+            >
+              <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4"/>
+              <span className="hidden sm:inline">Reset</span>
+            </button>
           </div>
         </div>
 
-        <div ref={scrollRef} className="overflow-y-auto p-2 sm:p-5 space-y-3">
+        {/* Messages */}
+        <div ref={scrollRef} className="overflow-y-auto p-2 sm:p-3 md:p-5 space-y-2 sm:space-y-3">
           <AnimatePresence initial={false}>
             {messages.map(m => (
-              <motion.div key={m.id} initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-10}} transition={{duration:0.18}} className={`flex ${m.sender==='user'?'justify-end':'justify-start'}`}>
+              <motion.div 
+                key={m.id} 
+                initial={{opacity:0,y:10}} 
+                animate={{opacity:1,y:0}} 
+                exit={{opacity:0,y:-10}} 
+                transition={{duration:0.18}} 
+                className={`flex ${m.sender==='user'?'justify-end':'justify-start'}`}
+              >
                 {m.sender==='bot' && (
-                  <div className="flex-shrink-0 mr-2 sm:mr-3 mt-1 hidden sm:block">
-                    <div className="p-2 rounded-xl bg-red-500/20 border border-red-400/30"><Bot className="w-4 h-4"/></div>
+                  <div className="flex-shrink-0 mr-1.5 sm:mr-2 md:mr-3 mt-1">
+                    <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-red-500/20 border border-red-400/30">
+                      <Bot className="w-3 h-3 sm:w-4 sm:h-4"/>
+                    </div>
                   </div>
                 )}
-                <div className={`max-w-[88%] sm:max-w-[72%] rounded-2xl px-4 py-3 text-[13px] sm:text-base leading-relaxed shadow-lg ${m.sender==='user'? 'bg-blue-500/20 border border-blue-300/20' : 'bg-red-500/15 border border-red-400/20'}`}>
+                <div className={`max-w-[85%] sm:max-w-[80%] md:max-w-[72%] rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-[13px] md:text-base leading-relaxed shadow-lg ${m.sender==='user'? 'bg-blue-500/20 border border-blue-300/20' : 'bg-red-500/15 border border-red-400/20'}`}>
                   <div className="whitespace-pre-wrap break-words">{m.text}</div>
                 </div>
                 {m.sender==='user' && (
-                  <div className="flex-shrink-0 ml-2 sm:ml-3 mt-1 hidden sm:block"><div className="p-2 rounded-xl bg-white/10"><User className="w-4 h-4"/></div></div>
+                  <div className="flex-shrink-0 ml-1.5 sm:ml-2 md:ml-3 mt-1">
+                    <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white/10">
+                      <User className="w-3 h-3 sm:w-4 sm:h-4"/>
+                    </div>
+                  </div>
                 )}
               </motion.div>
             ))}
           </AnimatePresence>
 
           {isTyping && (
-            <div className="flex items-center gap-2 text-white/70 text-sm pl-1">
-              <div className="p-2 rounded-xl bg-white/10"><Zap className="w-4 h-4"/></div>
+            <div className="flex items-center gap-2 text-white/70 text-xs sm:text-sm pl-1">
+              <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-white/10">
+                <Zap className="w-3 h-3 sm:w-4 sm:h-4"/>
+              </div>
               <div className="italic">naya material mix ho raha hai<span className="animate-pulse">…</span></div>
             </div>
           )}
         </div>
 
-        <div className="border-t border-white/10 p-2 sm:p-4 bg-white/5">
+        {/* Input */}
+        <div className="border-t border-white/10 p-2 sm:p-3 md:p-4 bg-white/5">
           <div className="flex items-end gap-2">
-            <textarea value={input} onChange={e=>setInput(e.target.value)} onKeyDown={handleKey} placeholder="Hinglish me likho, roast Hindi me suno… (Enter)" className="flex-1 resize-none rounded-xl bg-black/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 px-4 py-3 min-h-[48px] max-h-40"/>
-            <button onClick={handleSend} className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10"><Send className="w-4 h-4"/><span className="hidden sm:inline">Send</span></button>
+            <textarea 
+              value={input} 
+              onChange={e=>setInput(e.target.value)} 
+              onKeyDown={handleKey} 
+              placeholder="Hinglish me likho, roast Hindi me suno… (Enter)" 
+              className="flex-1 resize-none rounded-lg sm:rounded-xl bg-black/40 border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] sm:min-h-[48px] max-h-32 sm:max-h-40 text-xs sm:text-sm"
+            />
+            <button 
+              onClick={handleSend} 
+              className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 transition-colors"
+            >
+              <Send className="w-3 h-3 sm:w-4 sm:h-4"/>
+              <span className="hidden sm:inline">Send</span>
+            </button>
           </div>
-          <div className="text-[11px] sm:text-xs opacity-60 mt-2">Disclaimer: Masti wala roast — hard but playful; no slurs. 🔇</div>
+          <div className="text-[9px] sm:text-[11px] md:text-xs opacity-60 mt-1.5 sm:mt-2">
+            Disclaimer: Masti wala roast — hard but playful; no slurs. 🔇
+          </div>
         </div>
       </div>
     </div>
